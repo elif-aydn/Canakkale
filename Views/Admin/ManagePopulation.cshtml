@@ -1,0 +1,104 @@
+﻿
+
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Nüfus Yönetimi</h2>
+
+    <!-- Başarı ve Hata Mesajları -->
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered" id="populationTable">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>Yıl</th>
+                    <th>Erkek Nüfus</th>
+                    <th>Kadın Nüfus</th>
+                    <th>Toplam Nüfus</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="row-@item.Id" class="text-center">
+                        <td id="year-@item.Id">@item.Year</td>
+                        <td id="male-@item.Id">@item.MalePopulation</td>
+                        <td id="female-@item.Id">@item.FemalePopulation</td>
+                        <td id="total-@item.Id">@item.TotalPopulation</td>
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <button class="btn btn-warning btn-sm me-2" onclick="editPopulation(@item.Id)">Düzenle</button>
+                                <form method="post" action="@Url.Action("DeletePopulation", "Admin")" onsubmit="return confirm('Bu nüfusu silmek istediğinize emin misiniz?');">
+                                    <input type="hidden" name="id" value="@item.Id" />
+                                    <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Nüfus Ekleme/Düzenleme Formu -->
+    <div class="card shadow mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 id="form-title" class="mb-0 text-center">Yeni Nüfus Ekle</h5>
+        </div>
+        <div class="card-body">
+            <form id="populationForm" method="post" action="@Url.Action("EditPopulation", "Admin")">
+                <input type="hidden" id="PopulationId" name="Id" value="0" />
+                <div class="row align-items-end">
+                    <div class="col-md-3 mb-3">
+                        <label for="Year" class="form-label">Yıl</label>
+                        <input type="number" id="Year" name="Year" class="form-control" placeholder="Yıl" required />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="MalePopulation" class="form-label">Erkek Nüfus</label>
+                        <input type="number" id="MalePopulation" name="MalePopulation" class="form-control" placeholder="Erkek Nüfus" required />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="FemalePopulation" class="form-label">Kadın Nüfus</label>
+                        <input type="number" id="FemalePopulation" name="FemalePopulation" class="form-control" placeholder="Kadın Nüfus" required />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <button type="submit" class="btn btn-success w-100">Kaydet</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Nüfus Listesi -->
+
+
+</div>
+
+<!-- JavaScript Section -->
+<script>
+    function editPopulation(id) {
+        const year = document.getElementById(`year-${id}`).innerText.trim();
+        const male = document.getElementById(`male-${id}`).innerText.trim();
+        const female = document.getElementById(`female-${id}`).innerText.trim();
+
+        document.getElementById("PopulationId").value = id; // Set the Id in the form's hidden field
+        document.getElementById("Year").value = year; // Set Year in the form
+        document.getElementById("MalePopulation").value = male; // Set Male Population in the form
+        document.getElementById("FemalePopulation").value = female; // Set Female Population in the form
+        document.getElementById("form-title").innerText = "Nüfus Bilgilerini Düzenle"; // Update form title
+    }
+</script>

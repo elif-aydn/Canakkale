@@ -1,0 +1,31 @@
+﻿@model List<canakkale.Models.District>
+
+
+<title>İlçeler sayfası</title>
+
+<div class="container mt-5">
+    <!-- Başlık -->
+    <h2 class="text-center fw-bold">Çanakkale İlçeleri</h2>
+    <p class="text-center text-muted">Çanakkale'nin ilçeleri ve nüfus bilgileri aşağıdaki tabloda yer almaktadır.</p>
+
+    <!-- İlçe Listesi -->
+    <div class="table-responsive mt-4">
+        <table class="table table-hover table-bordered">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>İlçe Adı</th>
+                    <th>Nüfus</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var district in Model)
+                {
+                    <tr class="text-center">
+                        <td>@district.Name</td>
+                        <td>@district.Population</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

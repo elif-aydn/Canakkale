@@ -1,0 +1,39 @@
+﻿@model List<canakkale.Models.Populations>
+
+<title>Nüfus Sayfası</title>
+
+<div class="container mt-5">
+    <h2 class="text-center">Çanakkale Son 3 Yıl Nüfus Bilgileri</h2>
+    <p class="text-center text-muted">Son 3 yılın toplam nüfus ve kadın-erkek dağılımını aşağıdaki tabloda görebilirsiniz.</p>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive mt-4">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Yıl</th>
+                        <th>Toplam Nüfus</th>
+                        <th>Erkek Nüfus</th>
+                        <th>Kadın Nüfus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Year</td>
+                            <td>@item.TotalPopulation</td>
+                            <td>@item.MalePopulation</td>
+                            <td>@item.FemalePopulation</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p class="text-center text-danger mt-4">Nüfus bilgisi bulunamadı.</p>
+    }
+</div>

@@ -1,0 +1,32 @@
+﻿@model canakkale.Models.District
+
+<div class="container mt-4">
+    <h2 class="text-center">İlçe Düzenleme</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">@TempData["Message"]</div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <form method="post" action="@Url.Action("EditDistrict", "Admin")">
+        <input type="hidden" name="id" value="@Model.Id" />
+
+        <div class="mb-3">
+            <label for="name" class="form-label">İlçe Adı</label>
+            <input type="text" id="name" name="name" value="@Model.Name" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="population" class="form-label">Nüfus</label>
+            <input type="number" id="population" name="population" value="@Model.Population" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Güncelle</button>
+        <a href="@Url.Action("ManageDistricts", "Admin")" class="btn btn-secondary">Geri</a>
+    </form>
+</div>

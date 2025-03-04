@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Yönetici Ana Sayfası";
+}
+
+<div class="container mt-5">
+    <link rel="stylesheet" href="~/Content/stil.css" />
+
+    <!-- Başlık -->
+    <h2 class="text-center fw-bold mb-5">Yönetici Paneli</h2>
+
+    <!-- 2x2 Kart Düzeni -->
+    <div class="row g-4 justify-content-center">
+        <!-- İlk Sıra: Resim Düzenleme ve İlçe Düzenleme -->
+        <div class="col-md-6">
+            <div class="card text-center shadow border-0 h-100">
+                <div class="card-body d-flex flex-column">
+                    <i class="fa fa-image fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Resim Düzenleme</h5>
+                    <p class="card-text text-muted">Resim ekleyebilir, düzenleyebilir veya silebilirsiniz.</p>
+                    <div class="mt-auto">
+                        <a href="@Url.Action("ManageImages", "Images")" class="btn btn-primary w-100">Git</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card text-center shadow border-0 h-100">
+                <div class="card-body d-flex flex-column">
+                    <i class="fa fa-map-marker fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">İlçe Düzenleme</h5>
+                    <p class="card-text text-muted">İlçe bilgilerini ekleyebilir, düzenleyebilir veya silebilirsiniz.</p>
+                    <div class="mt-auto">
+                        <a href="@Url.Action("ManageDistricts", "Admin")" class="btn btn-success w-100">Git</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- İkinci Sıra: Nüfus Düzenleme ve Turistik Yer Düzenleme -->
+        <div class="col-md-6">
+            <div class="card text-center shadow border-0 h-100">
+                <div class="card-body d-flex flex-column">
+                    <i class="fa fa-users fa-3x text-warning mb-3"></i>
+                    <h5 class="card-title">Nüfus Düzenleme</h5>
+                    <p class="card-text text-muted">Nüfus bilgilerini ekleyebilir, düzenleyebilir veya silebilirsiniz.</p>
+                    <div class="mt-auto">
+                        <a href="@Url.Action("ManagePopulation", "Admin")" class="btn btn-warning w-100">Git</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card text-center shadow border-0 h-100">
+                <div class="card-body d-flex flex-column">
+                    <i class="fa fa-suitcase fa-3x text-danger mb-3"></i>
+                    <h5 class="card-title">Turistik Yer Düzenleme</h5>
+                    <p class="card-text text-muted">Turistik yer bilgilerini ekleyebilir, düzenleyebilir veya silebilirsiniz.</p>
+                    <div class="mt-auto">
+                        <a href="@Url.Action("ManageTouristicPlaces", "Admin")" class="btn btn-danger w-100">Git</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

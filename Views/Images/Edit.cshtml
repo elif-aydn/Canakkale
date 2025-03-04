@@ -1,0 +1,47 @@
+﻿@model canakkale.Models.Image
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Resim Düzenle</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <form method="post" action="/Images/Edit">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <div class="mb-3">
+            <label for="Url" class="form-label">Resim URL</label>
+            <input type="text" class="form-control" id="Url" name="Url" value="@Model.Url" placeholder="Resim URL'sini giriniz" required />
+        </div>
+        <div class="mb-3">
+            <label for="Description" class="form-label">Açıklama</label>
+            <textarea class="form-control" id="Description" name="Description" rows="4" placeholder="Resim açıklamasını giriniz">@Model.Description</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="Category" class="form-label">Kategori</label>
+            <select class="form-select" id="Category" name="Category" required>
+                <option value="" disabled selected>Kategori seçiniz</option>
+                <option value="Slider" @(Model.Category == "Slider" ? "selected" : "")>Slider</option>
+                <option value="Canakkale" @(Model.Category == "Canakkale" ? "selected" : "")>Çanakkale</option>
+                <option value="General" @(Model.Category == "General" ? "selected" : "")>Genel</option>
+            </select>
+        </div>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </div>
+    </form>
+    <div class="mt-3 text-center">
+        <a href="@Url.Action("ManageImages", "Images")" class="btn btn-secondary">İptal</a>
+    </div>
+</div>

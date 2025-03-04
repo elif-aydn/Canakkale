@@ -1,0 +1,22 @@
+﻿@model List<canakkale.Models.TouristicPlace>
+
+<div class="container mt-5">
+    <h2 class="text-center">Çanakkale'nin Turistik ve Tarihi Yerleri</h2>
+    <p class="text-center text-muted">Çanakkale'nin gezilmesi ve görülmesi gereken önemli yerlerini aşağıda bulabilirsiniz.</p>
+
+    <div class="touristic-list mt-4">
+        <ul>
+            @foreach (var place in Model)
+            {
+                <li>
+                    <h3>@place.Name</h3>
+                    <p>@place.Description</p>
+                    @if (!string.IsNullOrEmpty(place.Location))
+                    {
+                        <p><strong>Konum:</strong> @place.Location</p>
+                    }
+                </li>
+            }
+        </ul>
+    </div>
+</div>

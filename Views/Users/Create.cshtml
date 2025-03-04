@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Yeni Kullanıcı Ekle";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">Yeni Kullanıcı Ekle</h2>
+
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-success" role="alert">
+                    @ViewBag.Message
+                </div>
+            }
+
+            <form method="post" action="/Users/Create">
+                <div class="form-group mb-3">
+                    <label for="Ad" class="form-label">Ad:</label>
+                    <input type="text" class="form-control" id="Ad" name="Ad" placeholder="Adınızı giriniz" required />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Soyad" class="form-label">Soyad:</label>
+                    <input type="text" class="form-control" id="Soyad" name="Soyad" placeholder="Soyadınızı giriniz" required />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="Email" name="Email" placeholder="Email adresinizi giriniz" required />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Sifre" class="form-label">Şifre:</label>
+                    <input type="password" class="form-control" id="Sifre" name="Sifre" placeholder="Şifrenizi oluşturun" required />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Rol" class="form-label">Rol:</label>
+                    <select class="form-select" id="Rol" name="Rol" required>
+                        <option value="" disabled selected>Rol seçiniz</option>
+                        <option value="kullanıcı">Kullanıcı</option>
+                        <option value="yönetici">Yönetici</option>
+                    </select>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

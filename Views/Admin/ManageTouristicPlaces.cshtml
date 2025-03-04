@@ -1,0 +1,92 @@
+﻿@model List<canakkale.Models.TouristicPlace>
+
+<link rel="stylesheet" href="~/Content/stil.css" />
+
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Turistik Yerler Yönetimi</h2>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>Ad</th>
+                    <th>Açıklama</th>
+                    <th>Konum</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var place in Model)
+                {
+                    <tr class="text-center">
+                        <td>@place.Name</td>
+                        <td>@place.Description</td>
+                        <td>@place.Location</td>
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-warning btn-sm me-2"
+                                        onclick="editTouristicPlace(@place.Id, '@place.Name', '@place.Description', '@place.Location')">
+                                    Düzenle
+                                </button>
+                                <form method="post" action="/Admin/DeleteTouristicPlace" style="display:inline;">
+                                    <input type="hidden" name="id" value="@place.Id" />
+                                    <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Ekleme/Düzenleme Formu -->
+    <div class="card shadow mb-4">
+        <div class="card-header bg-success text-white">
+            <h5 id="form-title" class="mb-0">Yeni Turistik Yer Ekle</h5>
+        </div>
+        <div class="card-body">
+            <form method="post" action="/Admin/SaveTouristicPlace">
+                <input type="hidden" name="id" id="form-id" value="0" />
+                <div class="mb-3">
+                    <label for="form-name" class="form-label">Ad</label>
+                    <input type="text" name="name" id="form-name" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label for="form-description" class="form-label">Açıklama</label>
+                    <textarea name="description" id="form-description" class="form-control" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="form-location" class="form-label">Konum</label>
+                    <input type="text" name="location" id="form-location" class="form-control" required />
+                </div>
+                <button type="submit" class="btn btn-success w-100">Kaydet</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Turistik Yerler Listesi -->
+
+</div>
+
+<script>
+    function editTouristicPlace(id, name, description, location) {
+        document.getElementById("form-id").value = id;
+        document.getElementById("form-name").value = name;
+        document.getElementById("form-description").value = description;
+        document.getElementById("form-location").value = location;
+        document.getElementById("form-title").innerText = "Turistik Yer Düzenle";
+    }
+
+    function resetForm() {
+        document.getElementById("form-id").value = 0;
+        document.getElementById("form-name").value = "";
+        document.getElementById("form-description").value = "";
+        document.getElementById("form-location").value = "";
+        document.getElementById("form-title").innerText = "Yeni Turistik Yer Ekle";
+    }
+
+    // Sayfa yüklendiğinde formu sıfırla
+    document.addEventListener("DOMContentLoaded", resetForm);
+</script>

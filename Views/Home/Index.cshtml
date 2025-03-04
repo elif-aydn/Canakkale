@@ -1,0 +1,110 @@
+﻿@model IEnumerable<canakkale.Models.Image>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çanakkale Ana Sayfa</title>
+    <!-- Stil Dosyasını Bağlama -->
+    <link rel="stylesheet" href="~/Content/css/stil.css" />
+</head>
+<body>
+    <h1 style="text-align: center; color: #333; margin-top: 20px;">Çanakkale'nin Güzellikleri</h1>
+    <p style="text-align: center; color: #555; margin-bottom: 30px;">
+        Çanakkale'nin tarihini ve doğal güzelliklerini keşfetmek için kaydırmaya devam edin!
+    </p>
+
+    <!-- Slider -->
+    <div id="slider-container">
+        <div id="slider">
+            @foreach (var image in Model)
+            {
+                <div class="slider-item">
+                    <img src="@image.Url" alt="@image.Description" class="slider-image" />
+                    <div class="description">
+                        <h3>Çanakkale'nin Tarihi</h3>
+                        <p>@image.Description</p>
+                    </div>
+                </div>
+            }
+        </div>
+        <!-- Navigasyon Butonları -->
+        <button id="prev" class="nav-button">&#10094;</button>
+        <button id="next" class="nav-button">&#10095;</button>
+    </div>
+
+    <!-- Bilgilendirici Kutular -->
+    <div class="info-section">
+        <div class="info-box">
+            <h3>Etimoloji</h3>
+            <p>19. yüzyılda Çanakkale, resmî olarak Kale-i Sultaniye adıyla anılmaktaydı ve bu isim 1890 yılında
+               kayıtlara geçti. Osmanlı döneminde önemli bir kale olan Çanakkale, adını bu işlevden almıştır. 
+               17. yüzyılın sonlarından itibaren şehirde gelişen çömlek yapımı, ün kazanmasını sağlamış ve seramik kalitesiyle dikkat çekmiştir.
+               Bir seyyahın seramikleri Hollanda'nın Delft şehrindeki ürünlerle karşılaştırması, şehre "Çanak Kalesi" adının verilmesine neden olmuştur. 
+               Çanakkale'nin Yunanca adı "Dardanellia" (İngilizce "Dardanelles") olarak bilinmekte, İngilizler ise 1920'lerden itibaren şehre "Chanak" veya "Kale Sultanie" demiştir.</p>
+        </div>
+        <div class="info-box">
+            <h3>Tarih</h3>
+            <p>Çanakkale, antik Troya kalıntılarına ve ilk yerleşim izleri Bakır Çağı'na (yaklaşık 6000 yıl öncesine) dayanan zengin bir tarihe sahiptir.
+               Lidyalılar, MÖ 7. yüzyılda bölgeye hakim olmuş, ardından MÖ 6. yüzyılda Persler bölgenin stratejik önemini fark ederek kontrolü ele geçirmiştir. Pers Kralı Xerxes,
+               Çanakkale Boğazı'na ilk köprüyü yaptırmıştır. MÖ 334'te Büyük İskender, Persleri yenerek bölgeyi ele geçirmiştir. Daha sonra bölge, Roma İmparatorluğu'nun Asia eyaleti olmuş, 
+               Roma'nın bölünmesiyle Bizans kontrolüne geçmiştir. Bizans İmparatoru Justinian, boğazın güvenliği için kaleler yaptırmıştır. 11. yüzyılda Çaka Bey'in seferleriyle Türk hakimiyeti başlamış, 
+            Karesi Beyliği döneminde güçlenmiş ve 1361'de Osmanlı topraklarına katılmıştır.</p>
+        </div>
+        <div class="info-box">
+            <h3>Kültür</h3>
+            <p>
+                Çanakkale, binyıllardır farklı toplumların izlerini taşırken, 1970'lerden itibaren modernleşme süreciyle Türkiye'nin en modern şehirlerinden biri haline gelmiştir.
+                Kültürel çeşitliliğe sahip şehirde Manavlar, Türkmenler, Pomaklar, Yörükler, Bulgaristan göçmenleri, Kumuk Türkleri, Çerkesler ve Boşnaklar bir arada yaşamaktadır. 
+                Halkın büyük kısmı çekirdek aile yapısına sahiptir ve tarım, özellikle Boşnaklar ile Yörükler arasında yaygındır. Başlıca gıda ürünleri domates, zeytin, zeytinyağı, sardalya, peynir helvası ve keşkeği içerir.
+                 Çanakkale, yıllık yüzme yarışmalarının bitiş noktası olup, bu organizasyonun kökeni İngiliz şair Lord Byron'un 1810'daki yüzüşüne dayanmaktadır. Ayrıca, Truva filmindeki ahşap at şehrin sahilinde sergilenmektedir.
+            </p>
+        </div>
+    </div>
+
+    <!-- Slider JavaScript -->
+    <script>
+        const slider = document.querySelector("#slider");
+        const slides = document.querySelectorAll(".slider-item");
+        const nextButton = document.querySelector("#next");
+        const prevButton = document.querySelector("#prev");
+        let index = 0;
+
+        // Slider'ı güncelle
+        function updateSlider() {
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        // Sonraki resme geçiş
+        function nextSlide() {
+            index = (index + 1) % slides.length; // Eğer son slayt ise başa dön
+            updateSlider();
+        }
+
+        // Önceki resme geçiş
+        function prevSlide() {
+            index = (index - 1 + slides.length) % slides.length; // Eğer ilk slayttan önceki varsa sona dön
+            updateSlider();
+        }
+
+        // Otomatik geçiş
+        let interval = setInterval(nextSlide, 3000);
+
+        // Buton tıklama olayları
+        nextButton.addEventListener("click", () => {
+            clearInterval(interval);
+            nextSlide();
+        });
+
+        prevButton.addEventListener("click", () => {
+            clearInterval(interval);
+            prevSlide();
+        });
+
+        // Fareyle üzerine gelindiğinde otomatik geçişi durdur
+        slider.addEventListener("mouseenter", () => clearInterval(interval));
+        slider.addEventListener("mouseleave", () => interval = setInterval(nextSlide, 3000));
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Kullanıcı Ana Sayfası";
+}
+
+<title>Giriş Ana Sayfası</title>
+
+<div class="container mt-5">
+    <!-- Başlık ve Hoşgeldiniz Mesajı -->
+    <div class="text-center mb-5">
+        <h1 class="display-4">Hoşgeldiniz, @ViewBag.UserName!</h1>
+        <p class="lead">Çanakkale hakkında bilgi almak için aşağıdaki bölümlerden birini seçin.</p>
+    </div>
+
+    <!-- Yönlendirme Kartları -->
+    <div class="row text-center">
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("Population", "Home")" class="text-decoration-none">
+                <div class="card shadow-sm">
+                    <img src="/Content/Images/population.jpg" class="card-img-top" alt="Nüfus Bilgileri">
+                    <div class="card-body">
+                        <h5 class="card-title">Nüfus Bilgileri</h5>
+                        <p class="card-text">Şehrin nüfus dağılımını keşfedin.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("TouristicPlaces", "Home")" class="text-decoration-none">
+                <div class="card shadow-sm">
+                    <img src="/Content/Images/touristic.jpg" class="card-img-top" alt="Turistik Yerler">
+                    <div class="card-body">
+                        <h5 class="card-title">Turistik Yerler</h5>
+                        <p class="card-text">Şehrin tarihi ve turistik yerlerini görün.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("Districts", "Home")" class="text-decoration-none">
+                <div class="card shadow-sm">
+                    <img src="/Content/Images/districts.jpg" class="card-img-top" alt="İlçe Bilgileri">
+                    <div class="card-body">
+                        <h5 class="card-title">İlçe Bilgileri</h5>
+                        <p class="card-text">İlçeler hakkında detaylı bilgi alın.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

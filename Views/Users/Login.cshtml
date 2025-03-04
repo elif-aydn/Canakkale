@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Giriş Yap";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <!-- Başlık -->
+            <div class="text-center mb-4">
+                <h2 class="fw-bold">Giriş Yap</h2>
+                <p class="text-muted">Lütfen bilgilerinizi girerek giriş yapın</p>
+            </div>
+
+            <!-- Hata Mesajı -->
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    @ViewBag.Message
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            <!-- Giriş Formu -->
+            <div class="card shadow border-0">
+                <div class="card-body p-4">
+                    <form action="/Users/Login" method="post">
+                        <!-- E-posta -->
+                        <div class="form-group mb-3">
+                            <label for="Email" class="form-label">E-posta</label>
+                            <input type="email" class="form-control rounded-pill" id="Email" name="Email" placeholder="E-posta adresinizi giriniz" required>
+                        </div>
+
+                        <!-- Şifre -->
+                        <div class="form-group mb-3">
+                            <label for="Sifre" class="form-label">Şifre</label>
+                            <input type="password" class="form-control rounded-pill" id="Sifre" name="Sifre" placeholder="Şifrenizi giriniz" required>
+                        </div>
+
+                        <!-- Rol Seçimi -->
+                        <div class="form-group mb-4">
+                            <label for="Rol" class="form-label">Rol Seçin</label>
+                            <select class="form-select rounded-pill" id="Rol" name="Rol" required>
+                                <option value="" disabled selected>Rol Seçiniz</option>
+                                <option value="Kullanıcı">Kullanıcı</option>
+                                <option value="Yönetici">Yönetici</option>
+                            </select>
+                        </div>
+
+                        <!-- Giriş Yap Butonu -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill">Giriş Yap</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Alt Metin -->
+            <div class="text-center mt-3">
+                <small class="text-muted">Hesabınız yok mu? <a href="/Users/Register" class="text-primary fw-bold">Kayıt Olun</a></small>
+            </div>
+        </div>
+    </div>
+</div>
